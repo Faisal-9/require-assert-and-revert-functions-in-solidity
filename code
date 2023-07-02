@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract MyContract {
+    uint public myNumber;
+
+    function setNumber(uint _number) public {
+        require(_number > 0, "Number must be greater than 0");
+        myNumber = _number;
+    }
+
+    function incrementNumber() public {
+        uint oldNumber = myNumber;
+        myNumber++;
+        assert(myNumber > oldNumber);
+    }
+
+    function decrementNumber() public {
+        uint oldNumber = myNumber;
+        myNumber--;
+        if (myNumber < oldNumber) {
+            revert("Number cannot be negative");
+        }
+    }
+}
