@@ -2,24 +2,18 @@
 pragma solidity ^0.8.0;
 
 contract MyContract {
-    uint public myNumber;
 
-    function setNumber(uint _number) public {
-        require(_number > 0, "Number must be greater than 0");
-        myNumber = _number;
+    function RequireTest(uint _number) public pure {
+        require(_number > 20, "Number must be greater than 20");
     }
 
-    function incrementNumber() public {
-        uint oldNumber = myNumber;
-        myNumber++;
-        assert(myNumber > oldNumber);
+    function AssesrtTest(uint _number) public pure {
+        assert(_number == 20);
     }
 
-    function decrementNumber() public {
-        uint oldNumber = myNumber;
-        myNumber--;
-        if (myNumber < oldNumber) {
-            revert("Number cannot be negative");
+    function RevertTest(uint _number) public pure {
+        if (_number < 20) {
+            revert("Number must be greater than 20");
         }
     }
 }
