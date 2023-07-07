@@ -1,37 +1,40 @@
 # require-assert-and-revert-functions-in-solidity
 Metacrafters Assessment
 
+# MyContract
 
-This is a simple Solidity smart contract that allows the owner to set, increment, and decrement a number.
+This is a smart contract written in Solidity version 0.8.0. It contains three functions for testing different error handling mechanisms: RequireTest, AssertTest, and RevertTest.
 
-## Functions
+## RequireTest
 
-### setNumber(uint _number)
+solidity
+function RequireTest(uint _number) public pure {
+    require(_number > 20, "Number must be greater than 20");
+}
 
-This function allows the owner to set the value of myNumber. It takes an input parameter _number of type uint256. The _number must be greater than 0, otherwise the transaction will revert with an error message.
 
-### incrementNumber()
+The RequireTest function checks if the input _number is greater than 20 using the require statement. If the condition is not met, it will revert the transaction with the error message "Number must be greater than 20".
 
-This function allows the owner to increment the value of myNumber by 1. It first stores the current value of myNumber in a variable oldNumber, then increments myNumber by 1. After the increment, it asserts that myNumber is greater than oldNumber. If this assertion fails, the transaction will revert.
+## AssertTest
 
-### decrementNumber()
+solidity
+function AssesrtTest(uint _number) public pure {
+    assert(_number == 20);
+}
 
-This function allows the owner to decrement the value of myNumber by 1. It first stores the current value of myNumber in a variable oldNumber, then decrements myNumber by 1. If myNumber becomes negative after the decrement, the transaction will revert with an error message.
 
-## State Variables
+The AssertTest function uses the assert statement to validate if the input _number is equal to 20. If the condition is false, it will throw an exception and revert the transaction.
 
-### myNumber
+## RevertTest
 
-This state variable of type uint256 represents an unsigned integer. It stores the current value of the number.
+solidity
+function RevertTest(uint _number) public pure {
+    if (_number < 20) {
+        revert("Number must be greater than 20");
+    }
+}
 
-## Constructor
 
-The contract does not have a constructor defined explicitly, so it will use the default constructor provided by Solidity. The default constructor initializes myNumber to 0.
+The RevertTest function checks if the input _number is less than 20 using an if statement. If the condition evaluates to true, it will revert the transaction with the error message "Number must be greater than 20".
 
-## Usage
-
-1. Deploy the contract to a blockchain network.
-2. Call the setNumber function with the desired number as the input parameter to set the value of myNumber.
-3. Call the incrementNumber function to increment the value of myNumber by 1.
-4. Call the decrementNumber function to decrement the value of myNumber by 1.
-
+->Please note that all these functions are declared as pure, meaning they don't modify any state variables and can be called without making a transaction on the blockchain.
